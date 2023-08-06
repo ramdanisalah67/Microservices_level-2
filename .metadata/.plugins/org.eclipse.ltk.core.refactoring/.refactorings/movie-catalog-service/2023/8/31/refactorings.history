@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;UserRating.java&apos; to &apos;ratings-data-service/src/main/java/com.example.demo.Models&apos;&#x0D;&#x0A;- Original project: &apos;movie-catalog-service&apos;&#x0D;&#x0A;- Destination element: &apos;ratings-data-service/src/main/java/com.example.demo.Models&apos;&#x0D;&#x0A;- Original element: &apos;com.example.demo.Models.UserRating.java&apos;" description="Copy compilation unit" destination="=ratings-data-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.demo.Models" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.demo.Models{UserRating.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1691365452683" units="1" version="1.0"/>
+</session>

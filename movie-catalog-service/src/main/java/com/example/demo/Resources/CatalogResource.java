@@ -1,5 +1,6 @@
 package com.example.demo.Resources;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.example.demo.Models.CatalogItem;
 import com.example.demo.Models.Movie;
 import com.example.demo.Models.Rating;
+import com.example.demo.Models.UserRating;
 
 @RestController
 @RequestMapping("/catalog")
@@ -31,14 +33,10 @@ public class CatalogResource {
 		//call resource that he found on microservice 'movie-info-service'
 		
 		
-		List<Rating> ratings = Arrays.asList(
-				new Rating("1", 4),
-				new Rating("2", 7)
-				);
+		UserRating userRating = restTemplate.getForObject("http://localhost:8083/ratingdata/users/"+userId,UserRating.class)	;	
 		
 		
-		
-		return ratings.stream().map(rating -> {
+		return userRating.getRatings().stream().map(rating -> {
 	//	Movie myMovie =	restTemplate.getForObject("http://localhost:8082/movies/"+rating.getMovieId(),Movie.class);
 			
 			Movie myMovie =	 webClient.build()
