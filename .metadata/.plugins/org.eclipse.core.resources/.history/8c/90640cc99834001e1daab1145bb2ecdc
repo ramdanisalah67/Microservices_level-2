@@ -1,0 +1,45 @@
+package com.example.demo.Resources;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.example.demo.Models.CatalogItem;
+import com.example.demo.Models.Movie;
+import com.example.demo.Models.Rating;
+
+@RestController
+@RequestMapping("/catalog")
+public class CatalogResource {
+
+	@Autowired
+	private RestTemplate restTemplate;
+	@RequestMapping("/{userId}")
+	public List<CatalogItem> getCatalog(@PathVariable String userId){
+		
+		//call resource that he found on microservice 'movie-info-service'
+		
+		
+		List<Rating> ratings = Arrays.asList(
+				new Rating("1", 4),
+				new Rating("2", 7)
+				);
+		
+		
+		
+		return ratings.stream().map(rating->{
+		Movie myMovie =	restTemplate.getForObject("http://localhost:8082/movies/"+rating.getMovieId(),Movie.class);
+
+				new CatalogItem(myMovie.getName(), "Test", rating.getRating());
+		}).toList();	 
+		
+	}
+}
+
+

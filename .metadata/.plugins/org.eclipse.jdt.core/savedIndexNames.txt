@@ -1,0 +1,4 @@
+INDEX VERSION 1.132+D:\spring Microservices\java Breans\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+309141623.index
+2011417658.index
