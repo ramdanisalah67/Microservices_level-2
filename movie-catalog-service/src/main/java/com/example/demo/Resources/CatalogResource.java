@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,21 +31,21 @@ public class CatalogResource {
 	public List<CatalogItem> getCatalog(@PathVariable String userId){
 		
 		
-		//call resource that he found on microservice 'movie-info-service'
+		//call resource that he found on microservice 'rating-data-service'
 		
 		
-		UserRating userRating = restTemplate.getForObject("http://localhost:8083/ratingdata/users/"+userId,UserRating.class)	;	
+		UserRating userRating = restTemplate.getForObject("http://ratingdatah/ratingdata/users/"+userId,UserRating.class)	;	
 		
 		
 		return userRating.getRatings().stream().map(rating -> {
-	//	Movie myMovie =	restTemplate.getForObject("http://localhost:8082/movies/"+rating.getMovieId(),Movie.class);
+		Movie myMovie =	restTemplate.getForObject("http://movieinfoservice/movies/"+rating.getMovieId(),Movie.class);
 			
-			Movie myMovie =	 webClient.build()
+	/*		Movie myMovie =	 webClient.build()
 							.get()
-							.uri("http://localhost:8082/movies/"+rating.getMovieId())
+							.uri("http://movieInfoService/movies/"+rating.getMovieId())
 							.retrieve()
 							.bodyToMono(Movie.class)
-							.block();
+							.block(); */
 			
 			return 	new CatalogItem(myMovie.getName(), "Test", rating.getRating());
 		}).toList();	 
